@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Notes | WHATIN Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="about.html" class="nav-item">About</a></li>
+                <li><a href="contact.html" class="nav-item">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero" style="padding: 120px 0 60px;">
+            <h1 class="gradient-text">Master Handwritten Notes</h1>
+            <p>Premium, topper-verified notes captured for the highest level of conceptual clarity.</p>
+        </section>
+
+        <div id="content-box">
+            <div id="loading-state" style="text-align: center; padding: 50px;">
+                <i data-lucide="loader-2" class="animate-spin" size="40"></i>
+                <p style="margin-top: 15px;">Gathering notes from toppers...</p>
+            </div>
+        </div>
+
+        <!-- PROFESSIONAL GUIDANCE SECTION -->
+        <section class="rich-content">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The Topper's
+                Study Protocol</h2>
+
+            <div class="content-block">
+                <h3><i data-lucide="brain"></i> Cognitive Benefits of Handwritten Media</h3>
+                <p>Digital PPTs are easy to scroll, but handwritten notes are etched into your brain. The act of writing
+                    forces the author to simplify complex topics, making them easier for you to digest.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i data-lucide="pencil" style="color: #f43f5e; margin-right: 10px;"></i> Master Summaries
+                        </h4>
+                        <p>Our notes aren't just transcriptions; they are summaries. A 50-page chapter is often
+                            condensed into 5 pages of pure technical gravity.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i data-lucide="refresh-ccw" style="color: var(--accent-tertiary); margin-right: 10px;"></i>
+                            Spaced Repetition</h4>
+                        <p>Study these notes in cycles: Day 1, Day 3, and Day 7. This moves the technical diagrams from
+                            short-term to permanent memory storage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3><i data-lucide="award"></i> How to Use These Notes?</h3>
+                <div class="side-border-list">
+                    <div class="list-item">
+                        <h4>Active Recall Technique</h4>
+                        <p>After reading a section, close the PDF and try to sketch the diagram from memory. If you can
+                            draw it, you have mastered it.</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Highlighting the Essentials</h4>
+                        <p>When you print these notes, use highlighters: Yellow for definitions, Green for examples, and
+                            Red for "Highly Probable" exam questions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box"
+                style="color: #a855f7; border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.05);">
+                <i data-lucide="sparkles" size="24"></i>
+                <div>
+                    <strong>Extra Hint:</strong> Pay close attention to the handwriting margin notes. Toppers often
+                    write "Repeated in 2021" or "Easy to forget" in the margins—these are precious insights.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links" style="margin-bottom: 20px;">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { db, collection, getDocs, query, where } from './firebase-config.js';
+        lucide.createIcons();
+
+        const contentBox = document.getElementById('content-box');
+
+        async function fetchNotes() {
+            try {
+                const q = query(collection(db, "resources"), where("category", "==", "notes"));
+                const querySnapshot = await getDocs(q);
+                let resources = [];
+                querySnapshot.forEach(doc => {
+                    resources.push({ id: doc.id, ...doc.data() });
+                });
+
+                let html = `
+                    <div class="filter-container">
+                        <button class="filter-btn active" onclick="window.filterYear('all')">All Years</button>
+                        <button class="filter-btn" onclick="window.filterYear('1')">1st Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('2')">2nd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('3')">3rd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('4')">4th Year</button>
+                    </div>
+                    <div id="resource-container">
+                `;
+
+                const years = ['1', '2', '3', '4'];
+                years.forEach(year => {
+                    const yearResources = resources.filter(res => res.year === year);
+                    if (yearResources.length > 0) {
+                        html += `
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
+                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-tertiary); padding-left: 15px;">Year ${year} Master Notes</h2>
+                                <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                        `;
+                        yearResources.forEach(data => {
+                            html += `
+                                <div class="card glass animate-fade">
+                                    <div style="font-size: 0.75rem; color: var(--accent-tertiary); margin-bottom: 10px;">Topper Verified</div>
+                                    <h4 style="margin-bottom: 15px; font-size: 0.95rem;">${data.title}</h4>
+                                    <a href="${data.url}" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px; background: var(--gradient-3);" target="_blank">Study Now</a>
+                                </div>
+                            `;
+                        });
+                        html += `</div></div>`;
+                    }
+                });
+
+                html += '</div>';
+                contentBox.innerHTML = html;
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error(error);
+                contentBox.innerHTML = '<p style="color: #ff576c; text-align: center;">Error loading Notes.</p>';
+            }
+        }
+
+        window.filterYear = (year) => {
+            const sections = document.querySelectorAll('.year-section');
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.innerText.toLowerCase().includes(year) || (year === 'all' && btn.innerText.includes('All')) ? btn.classList.add('active') : btn.classList.remove('active'));
+            sections.forEach(section => section.style.display = (year === 'all' || section.id === `year-section-${year}`) ? 'block' : 'none');
+        };
+
+        fetchNotes();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | WHATIN Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section id="login-section" class="glass animate-fade"
+            style="max-width: 400px; margin: 120px auto; padding: 40px; text-align: center;">
+            <i data-lucide="lock" size="48" class="gradient-text" style="margin-bottom: 20px;"></i>
+            <h2 class="gradient-text" style="margin-bottom: 30px;">Admin Access</h2>
+
+            <div style="text-align: left; margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Email Address</label>
+                <input type="email" id="login-email" class="glass"
+                    style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white;"
+                    placeholder="admin@whatin.in">
+            </div>
+
+            <div style="text-align: left; margin-bottom: 30px;">
+                <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Password</label>
+                <input type="password" id="login-password" class="glass"
+                    style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white;"
+                    placeholder="••••••••">
+            </div>
+
+            <button id="login-btn" class="btn btn-primary" style="width: 100%;">Authorize & Enter</button>
+            <p id="error-msg" style="color: #ff576c; margin-top: 20px; font-size: 0.9rem; display: none;"></p>
+        </section>
+    </main>
+
+    <script type="module">
+        import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
+
+        lucide.createIcons();
+
+        const loginBtn = document.getElementById('login-btn');
+        const errorMsg = document.getElementById('error-msg');
+
+        loginBtn.addEventListener('click', async () => {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+
+            if (!email || !pass) {
+                errorMsg.innerText = "Please fill all fields.";
+                errorMsg.style.display = "block";
+                return;
+            }
+
+            try {
+                loginBtn.disabled = true;
+                loginBtn.innerText = "Authenticating...";
+                await signInWithEmailAndPassword(auth, email, pass);
+                window.location.href = "admin.html";
+            } catch (error) {
+                console.error(error);
+                errorMsg.innerText = "Error: " + error.message;
+                errorMsg.style.display = "block";
+                loginBtn.disabled = false;
+                loginBtn.innerText = "Authorize & Enter";
+            }
+        });
+
+        // Redirect if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = "admin.html";
+            }
+        });
+    </script>
+</body>
+
+</html>

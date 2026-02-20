@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway Materials | WHATIN Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="about.html" class="nav-item">About</a></li>
+                <li><a href="contact.html" class="nav-item">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero" style="padding: 120px 0 60px;">
+            <h1 class="gradient-text">Gateway to Success</h1>
+            <p>Syllabus, Previous Year Papers, and Essential Question Banks for AKTU.</p>
+        </section>
+
+        <div id="content-box">
+            <div id="loading-state" style="text-align: center; padding: 50px;">
+                <i data-lucide="loader-2" class="animate-spin" size="40"></i>
+                <p style="margin-top: 15px;">Scanning database...</p>
+            </div>
+        </div>
+
+        <!-- PROFESSIONAL GUIDANCE SECTION -->
+        <section class="rich-content">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The Gateway
+                Strategy: PYQ Analysis</h2>
+
+            <div class="content-block">
+                <h3><i data-lucide="microscope"></i> Why PYQs are Gold?</h3>
+                <p>In AKTU, the same core concepts are revisited every few years. Our Gateway section is designed to
+                    help you identify these "Gold Topics" that are virtually guaranteed to appear.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i data-lucide="history" style="color: var(--accent-secondary); margin-right: 10px;"></i>
+                            5-Year Mapping</h4>
+                        <p>Analyze the last 5 years of papers. If a topic has been missing for 2 consecutive years, it
+                            has a 90% chance of being asked in the next cycle.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i data-lucide="target" style="color: #ff576c; margin-right: 10px;"></i> Pattern Recognition
+                        </h4>
+                        <p>Notice how AKTU shifts from theory to numericals every few years. Use our PYQs to gauge the
+                            current "mood" of the question-setting committee.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3><i data-lucide="map-pinned"></i> Syllabus Navigation</h3>
+                <div class="side-border-list">
+                    <div class="list-item">
+                        <h4>Trust the Official Syllabus</h4>
+                        <p>Before exams, cross-check the official syllabus provided here. Quantum series sometimes miss
+                            edge-case topics that AKTU examiner's love.</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>The Question Bank Logic</h4>
+                        <p>Our curated banks focus on problem-solving. Practice the numericals from the last 3-year
+                            papers multiple times to build "Muscle Memory" for the exam hall.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links" style="margin-bottom: 20px;">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { db, collection, getDocs, query, where } from './firebase-config.js';
+        lucide.createIcons();
+
+        const contentBox = document.getElementById('content-box');
+
+        async function fetchGateway() {
+            try {
+                const q = query(collection(db, "resources"), where("category", "==", "gateway"));
+                const querySnapshot = await getDocs(q);
+                let resources = [];
+                querySnapshot.forEach(doc => {
+                    resources.push({ id: doc.id, ...doc.data() });
+                });
+
+                let html = `
+                    <div class="filter-container">
+                        <button class="filter-btn active" onclick="window.filterYear('all')">All Years</button>
+                        <button class="filter-btn" onclick="window.filterYear('1')">1st Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('2')">2nd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('3')">3rd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('4')">4th Year</button>
+                    </div>
+                    <div id="resource-container">
+                `;
+
+                const years = ['1', '2', '3', '4'];
+                years.forEach(year => {
+                    const yearResources = resources.filter(res => res.year === year);
+                    if (yearResources.length > 0) {
+                        html += `
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
+                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-secondary); padding-left: 15px;">Year ${year} Documents</h2>
+                                <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                        `;
+                        yearResources.forEach(data => {
+                            html += `
+                                <div class="card glass animate-fade">
+                                    <div style="font-size: 0.75rem; color: var(--accent-secondary); margin-bottom: 10px;">${data.title}</div>
+                                    <h4 style="margin-bottom: 15px; font-size: 0.95rem;">Official Materials</h4>
+                                    <a href="${data.url}" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px; background: var(--gradient-2);" target="_blank">View Document</a>
+                                </div>
+                            `;
+                        });
+                        html += `</div></div>`;
+                    }
+                });
+
+                html += '</div>';
+                contentBox.innerHTML = html;
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error(error);
+                contentBox.innerHTML = '<p style="color: #ff576c; text-align: center;">Error loading resources.</p>';
+            }
+        }
+
+        window.filterYear = (year) => {
+            const sections = document.querySelectorAll('.year-section');
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.innerText.toLowerCase().includes(year) || (year === 'all' && btn.innerText.includes('All')) ? btn.classList.add('active') : btn.classList.remove('active'));
+            sections.forEach(section => section.style.display = (year === 'all' || section.id === `year-section-${year}`) ? 'block' : 'none');
+        };
+
+        fetchGateway();
+    </script>
+</body>
+
+</html>

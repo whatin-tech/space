@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Library | WHATIN Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="about.html" class="nav-item">About</a></li>
+                <li><a href="contact.html" class="nav-item">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero" style="padding: 120px 0 60px;">
+            <h1 class="gradient-text">Quantum Series Library</h1>
+            <p>Access the complete digital collection of Quantum Series for all AKTU branches.</p>
+        </section>
+
+        <!-- Dynamic Content Section -->
+        <div id="content-box">
+            <div id="loading-state" style="text-align: center; padding: 50px;">
+                <i data-lucide="loader-2" class="animate-spin" size="40"></i>
+                <p style="margin-top: 15px;">Connecting to Library...</p>
+            </div>
+        </div>
+
+        <!-- PROFESSIONAL GUIDANCE SECTION -->
+        <section class="rich-content">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">How to Master
+                the Quantum Series</h2>
+
+            <div class="content-block">
+                <h3><i data-lucide="book"></i> The Art of Selective Reading</h3>
+                <p>The Quantum Series is a condensed version of the vast syllabus. To use it effectively, do not read it
+                    like a novel. Follow the Pareto Principle: 80% of the questions come from 20% of the topics.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i data-lucide="star" style="color: gold; margin-right: 10px;"></i> Star Marking</h4>
+                        <p>Most Quantums mark frequently repeated questions with stars (*). These are your
+                            <strong>Must-Read</strong> zones for the night before the exam.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i data-lucide="check-square" style="color: var(--accent-primary); margin-right: 10px;"></i>
+                            Section A Focus</h4>
+                        <p>The 2-mark questions in Section A of the Quantum are often repeated exactly. Mastering these
+                            first gives you a 20-mark headstart.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-block">
+                <h3><i data-lucide="layers"></i> Unit-Wise Strategy</h3>
+                <div class="side-border-list">
+                    <div class="list-item">
+                        <h4>Prioritize Unit 1 & 2</h4>
+                        <p>These units usually contain the core definitions and basic architectures. They are the
+                            easiest to memorize and often carry standard 10-mark questions.</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>The Unit 5 Goldmine</h4>
+                        <p>Unit 5 often focuses on applications and case studies. It is typically less theoretical and
+                            more logical, making it very scoring if you understand the flow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <i data-lucide="info" size="24"></i>
+                <div>
+                    <strong>Topper's Secret:</strong> Don't just rely on the text in the Quantum. Look at the diagrams
+                    provided and try to redraw them once. A neat diagram on an AKTU sheet can save you even if your
+                    theory is weak.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links" style="margin-bottom: 20px;">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { db, collection, getDocs, query, where } from './firebase-config.js';
+        lucide.createIcons();
+
+        const contentBox = document.getElementById('content-box');
+
+        async function fetchQuantum() {
+            try {
+                const q = query(collection(db, "resources"), where("category", "==", "quantum"));
+                const querySnapshot = await getDocs(q);
+                let resources = [];
+                querySnapshot.forEach(doc => {
+                    resources.push({ id: doc.id, ...doc.data() });
+                });
+
+                let html = `
+                    <div class="filter-container">
+                        <button class="filter-btn active" onclick="window.filterYear('all')">All Years</button>
+                        <button class="filter-btn" onclick="window.filterYear('1')">1st Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('2')">2nd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('3')">3rd Year</button>
+                        <button class="filter-btn" onclick="window.filterYear('4')">4th Year</button>
+                    </div>
+                    <div id="resource-container">
+                `;
+
+                const years = ['1', '2', '3', '4'];
+                years.forEach(year => {
+                    const yearResources = resources.filter(res => res.year === year);
+                    if (yearResources.length > 0) {
+                        html += `
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
+                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-primary); padding-left: 15px;">Year ${year}</h2>
+                                <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+                        `;
+                        yearResources.forEach(data => {
+                            html += `
+                                <div class="card glass animate-fade">
+                                    <div style="font-size: 0.8rem; color: var(--accent-primary); margin-bottom: 10px;">${data.code || 'N/A'}</div>
+                                    <h4 style="margin-bottom: 15px; font-size: 1rem;">${data.title}</h4>
+                                    <a href="${data.url}" class="btn btn-primary" style="width: 100%; font-size: 0.8rem; padding: 8px;" target="_blank">Download PDF</a>
+                                </div>
+                            `;
+                        });
+                        html += `</div></div>`;
+                    }
+                });
+
+                html += '</div>';
+                contentBox.innerHTML = html;
+                lucide.createIcons();
+
+            } catch (error) {
+                console.error(error);
+                contentBox.innerHTML = '<p style="color: #ff576c; text-align: center;">Failed to load resources. Please try again later.</p>';
+            }
+        }
+
+        window.filterYear = (year) => {
+            const sections = document.querySelectorAll('.year-section');
+            const btns = document.querySelectorAll('.filter-btn');
+
+            btns.forEach(btn => {
+                if (btn.innerText.toLowerCase().includes(year) || (year === 'all' && btn.innerText.includes('All'))) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            sections.forEach(section => {
+                if (year === 'all' || section.id === `year-section-${year}`) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        };
+
+        fetchQuantum();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | WHATIN Ecosystem</title>
+    <meta name="description" content="Get in touch with WHATIN Ecosystem for support, feedback, or resource requests.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .contact-card i {
+            margin-bottom: 20px;
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="about.html" class="nav-item">About</a></li>
+                <li><a href="contact.html" class="nav-item active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero" style="padding: 120px 0 60px;">
+            <h1 class="gradient-text">Get In Touch</h1>
+            <p>Have questions or suggestions? We'd love to hear from you. Reach out to us through any of the channels
+                below.</p>
+        </section>
+
+        <div class="contact-grid">
+            <div class="glass contact-card">
+                <i data-lucide="mail" size="40"></i>
+                <h3>Email Support</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">support@whatin.in</p>
+            </div>
+            <div class="glass contact-card">
+                <i data-lucide="message-circle" size="40"></i>
+                <h3>Social Media</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">Follow us on Instagram @whatin_ecosystem</p>
+            </div>
+            <div class="glass contact-card">
+                <i data-lucide="map-pin" size="40"></i>
+                <h3>Location</h3>
+                <p style="color: var(--text-muted); margin-top: 10px;">AKTU Regional Hub, Uttar Pradesh</p>
+            </div>
+        </div>
+
+        <section class="glass" style="margin-top: 50px; padding: 40px;">
+            <h2 style="margin-bottom: 20px;">Send a Message</h2>
+            <form action="#" method="post" id="contact-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" placeholder="Your Name" class="glass"
+                            style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white; margin-top: 8px;">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="Your Email" class="glass"
+                            style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white; margin-top: 8px;">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 30px;">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="How can we help you?" class="glass"
+                        style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white; margin-top: 8px;"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary"
+                    onclick="alert('Thank you for contacting us! We will get back to you soon.')">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links" style="margin-bottom: 20px;">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms & Conditions</a>
+            </div>
+            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

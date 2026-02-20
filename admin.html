@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | WHATIN Ecosystem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 40px auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        .stat-card h2 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .manage-section {
+            margin-top: 50px;
+        }
+
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .resource-item:hover {
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .item-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .item-info span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .delete-btn {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+            border: 1px solid rgba(245, 87, 108, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #f5576c;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+
+        .badge-quantum {
+            background: rgba(0, 242, 254, 0.2);
+            color: #00f2fe;
+        }
+
+        .badge-gateway {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+        }
+
+        .badge-notes {
+            background: rgba(240, 147, 251, 0.2);
+            color: #f093fb;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading-overlay">
+        <div class="animate-spin"><i data-lucide="loader-2" size="48" color="#00f2fe"></i></div>
+    </div>
+
+    <header>
+        <nav class="glass">
+            <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="admin.html" class="nav-item active">Dashboard</a></li>
+            </ul>
+            <button id="logout-btn" class="btn glass"
+                style="font-size: 0.8rem; border-radius: 20px; padding: 8px 20px;">Logout</button>
+        </nav>
+    </header>
+
+    <main class="container admin-layout">
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard">
+            <h2 class="gradient-text" style="margin-bottom: 25px;">Ecosystem Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card glass">
+                    <h2 id="total-count" class="gradient-text">0</h2>
+                    <p>Total Resources</p>
+                </div>
+                <div class="stat-card glass">
+                    <h2 id="quantum-count" style="color: #00f2fe;">0</h2>
+                    <p>Quantum Books</p>
+                </div>
+                <div class="stat-card glass">
+                    <h2 id="gateway-count" style="color: #667eea;">0</h2>
+                    <p>Gateway Docs</p>
+                </div>
+                <div class="stat-card glass">
+                    <h2 id="notes-count" style="color: #f093fb;">0</h2>
+                    <p>Handwritten Notes</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Form -->
+        <section class="glass" style="padding: 30px;">
+            <h3 style="margin-bottom: 25px; display: flex; align-items: center;">
+                <i data-lucide="plus-circle" style="margin-right: 10px; color: var(--accent-primary);"></i>
+                Upload New Resource
+            </h3>
+            <form id="upload-form">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="form-group">
+                        <label>Resource Title</label>
+                        <input type="text" id="subject-name" placeholder="E.g. Engineering Maths" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="category" required>
+                            <option value="quantum">Quantum Series</option>
+                            <option value="gateway">Gateway (PYQ/Syllabus)</option>
+                            <option value="notes">Handwritten Notes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 15px;">
+                    <div class="form-group">
+                        <label>Target Year</label>
+                        <select id="target-year" required>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject Code</label>
+                        <input type="text" id="subject-code" placeholder="E.g. KCS301">
+                    </div>
+                    <div class="form-group" style="flex-grow: 1;">
+                        <label>File URL</label>
+                        <input type="url" id="file-url" placeholder="Paste link here..." required>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 25px;">
+                    Publish Resource
+                </button>
+            </form>
+        </section>
+
+        <!-- Manage Section -->
+        <section class="manage-section">
+            <h3 style="margin-bottom: 20px; display: flex; align-items: center;">
+                <i data-lucide="list" style="margin-right: 10px; color: var(--accent-secondary);"></i>
+                Manage Uploaded Content
+            </h3>
+            <div id="resource-list" class="resource-list">
+                <!-- Items will be populated here -->
+                <div class="empty-state" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    <p>No resources found in database.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { db, auth, collection, addDoc, onAuthStateChanged, signOut, serverTimestamp, onSnapshot, deleteDoc, doc, query, orderBy } from './firebase-config.js';
+
+        lucide.createIcons();
+
+        // Auth Protection
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "login.html";
+            } else {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            if (confirm("Are you sure you want to logout?")) {
+                await signOut(auth);
+                window.location.href = "login.html";
+            }
+        });
+
+        // Real-time Data Sync (Stats & List)
+        const resourceList = document.getElementById('resource-list');
+        const q = query(collection(db, "resources"), orderBy("createdAt", "desc"));
+
+        onSnapshot(q, (snapshot) => {
+            const resources = [];
+            let counts = { total: 0, quantum: 0, gateway: 0, notes: 0 };
+
+            resourceList.innerHTML = '';
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const id = doc.id;
+                resources.push({ id, ...data });
+
+                // Update counts
+                counts.total++;
+                counts[data.category]++;
+
+                // Render Item
+                const item = document.createElement('div');
+                item.className = 'resource-item glass';
+                item.innerHTML = `
+                    <div class="item-info">
+                        <h4>${data.title} <span class="badge badge-${data.category}">${data.category}</span></h4>
+                        <span>Year: ${data.year} | Code: ${data.code || 'N/A'}</span>
+                    </div>
+                    <button class="delete-btn" data-id="${id}">
+                        <i data-lucide="trash-2" size="18"></i>
+                    </button>
+                `;
+                resourceList.appendChild(item);
+            });
+
+            // Update Stats in UI
+            document.getElementById('total-count').innerText = counts.total;
+            document.getElementById('quantum-count').innerText = counts.quantum;
+            document.getElementById('gateway-count').innerText = counts.gateway;
+            document.getElementById('notes-count').innerText = counts.notes;
+
+            if (counts.total === 0) {
+                resourceList.innerHTML = '<div class="empty-state" style="text-align: center; padding: 40px; color: var(--text-muted);"><p>No resources found.</p></div>';
+            }
+
+            // Re-initialize icons
+            lucide.createIcons();
+
+            // Attach Delete Event
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.onclick = async () => {
+                    if (confirm("Are you sure you want to delete this resource?")) {
+                        const id = btn.getAttribute('data-id');
+                        try {
+                            await deleteDoc(doc(db, "resources", id));
+                        } catch (error) {
+                            alert("Error deleting: " + error.message);
+                        }
+                    }
+                };
+            });
+        });
+
+        // Handle Form Submission
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+
+            const data = {
+                title: document.getElementById('subject-name').value,
+                year: document.getElementById('target-year').value,
+                code: document.getElementById('subject-code').value,
+                category: document.getElementById('category').value,
+                url: document.getElementById('file-url').value,
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "resources"), data);
+                document.getElementById('upload-form').reset();
+            } catch (error) {
+                alert("Error: " + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Publish Resource";
+            }
+        });
+    </script>
+</body>
+
+</html>

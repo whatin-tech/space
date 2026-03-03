@@ -4,16 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Library | WHATIN Ecosystem</title>
+    <title>Quantum Digital Library | Comprehensive AKTU Series</title>
+    <meta name="description"
+        content="Explore the full AKTU Quantum Series library. Verified digital copies for all engineering branches, semesters, and years. The ultimate revision tool for AKTU exams.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="author" content="Dushyant Saini">
+    <meta name="keywords" content="WHATIN, AKTU Quantum, Quantum Series, B.Tech Series, Dushyant Saini">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Quantum Digital Library",
+      "url": "https://whatin.in/quantum.html",
+      "description": "Explore the full AKTU Quantum Series library, provided by WHATIN Ecosystem under Dushyant Saini.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "WHATIN Ecosystem",
+        "founder": {
+          "@type": "Person",
+          "name": "Dushyant Saini"
+        }
+      }
+    }
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="theme-quantum">
+    <div class="canvas-texture"></div>
+    <img src="expressionist_starry_library_1772525660121.png" class="art-bg" alt="Atmospheric Art">
+
+    <div class="bg-glow glow-top-right" style="background: var(--quantum-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--quantum-secondary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-primary);"></div>
+
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
                 <li><a href="index.html" class="nav-item">Home</a></li>
                 <li><a href="about.html" class="nav-item">About</a></li>
                 <li><a href="contact.html" class="nav-item">Contact</a></li>
@@ -23,8 +60,27 @@
 
     <main class="container">
         <section class="hero" style="padding: 120px 0 60px;">
-            <h1 class="gradient-text">Quantum Series Library</h1>
-            <p>Access the complete digital collection of Quantum Series for all AKTU branches.</p>
+            <h1 class="gradient-text">The Quantum Digital Library</h1>
+            <p>Your portal to the most comprehensive collection of AKTU Quantum Series. Curated for clarity,
+                digitized for speed, and structured for your academic success.</p>
+        </section>
+
+        <!-- THE QUANTUM LEGACY SECTION -->
+        <section class="rich-content" style="margin-bottom: 80px; border-color: var(--quantum-primary);">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The Quantum
+                Legacy</h2>
+            <div class="content-block">
+                <p>For over a decade, the <strong>Quantum Series</strong> has been the backbone of AKTU exam
+                    preparation. What started as a simple question bank has evolved into a sophisticated revision
+                    ecosystem. At WHATIN, we recognize this legacy. Our digital library isn't just a list of links; it's
+                    a preserved archive of engineering knowledge tailored specifically for the AKTU examination pattern.
+                </p>
+                <p style="margin-top: 20px;">We believe in <strong>Accessible Excellence</strong>. Every PDF in our
+                    library is selected for its legibility and completeness. Whether you are a first-year student just
+                    starting with Engineering Mathematics or a final-year student diving into Cloud Computing, the
+                    Quantum series provided here offers the fastest path to conceptual understanding and exam-readiness.
+                </p>
+            </div>
         </section>
 
         <!-- Dynamic Content Section -->
@@ -49,7 +105,8 @@
                     <div class="feature-item">
                         <h4><i data-lucide="star" style="color: gold; margin-right: 10px;"></i> Star Marking</h4>
                         <p>Most Quantums mark frequently repeated questions with stars (*). These are your
-                            <strong>Must-Read</strong> zones for the night before the exam.</p>
+                            <strong>Must-Read</strong> zones for the night before the exam.
+                        </p>
                     </div>
                     <div class="feature-item">
                         <h4><i data-lucide="check-square" style="color: var(--accent-primary); margin-right: 10px;"></i>
@@ -85,20 +142,139 @@
                 </div>
             </div>
         </section>
+        <!-- DATA & STATISTICS SECTION -->
+        <section class="data-viz-section">
+            <div class="chart-card" style="border-color: rgba(124, 58, 237, 0.3)">
+                <h4><i data-lucide="bar-chart"></i> AKTU Question Weightage</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Average mark distribution
+                    across the 5 units based on last 5 years' papers.</p>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="weightageChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card" style="border-color: rgba(124, 58, 237, 0.3)">
+                <h4><i data-lucide="crosshair"></i> High-Scoring Subjects</h4>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="rank">#1</span>
+                        <span class="subject">Universal Human Values</span>
+                        <span class="stat" style="color:var(--gateway-secondary)">85% Avg</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#2</span>
+                        <span class="subject">Web Technology (KCS601)</span>
+                        <span class="stat" style="color:var(--gateway-secondary)">78% Avg</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#3</span>
+                        <span class="subject">Software Engineering</span>
+                        <span class="stat" style="color:var(--gateway-secondary)">72% Avg</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#4</span>
+                        <span class="subject">Cyber Security (KNC301)</span>
+                        <span class="stat" style="color:var(--gateway-secondary)">91% Avg</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#5</span>
+                        <span class="subject">Constitution of India</span>
+                        <span class="stat" style="color:var(--gateway-secondary)">89% Avg</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-links" style="margin-bottom: 20px;">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+                    <p style="font-size: 1.05rem; max-width: 300px;">
+                        The ultimate academic companion for AKTU students. Elevating the way you learn with handwritten
+                        notes, PYQs, and Quantum series across all branches.
+                    </p>
+                    <div class="social-links" style="margin-top: 30px; display: flex; gap: 15px;">
+                        <a href="#" class="social-icon"><i data-lucide="github"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="login.html">Admin Portal</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Resources</h4>
+                    <div class="footer-links">
+                        <a href="notes.html">Handwritten Notes</a>
+                        <a href="quantum.html">Quantum Series</a>
+                        <a href="gateway.html">Gateway PYQs</a>
+                        <a href="#syllabus">Syllabus Outlines</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms & Conditions</a>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+
+            <div
+                style="text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.95rem;">
+                <p class="copyright">&copy; 2026 WHATIN Ecosystem. Crafted with 💡 & ❤️ for the Student Community.</p>
+            </div>
         </div>
     </footer>
+
+    <div class="side-nav">
+        <a href="#year-section-1" class="side-nav-item" title="Year 1">1</a>
+        <a href="#year-section-2" class="side-nav-item" title="Year 2">2</a>
+        <a href="#year-section-3" class="side-nav-item" title="Year 3">3</a>
+        <a href="#year-section-4" class="side-nav-item" title="Year 4">4</a>
+    </div>
+
+    <script>
+        // Intersection Observer for Section Highlighting
+        const observerOptions = {
+            root: null,
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navItem = document.querySelector(`.side-nav-item[href="#${id}"]`);
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-focus');
+                    if (navItem) navItem.classList.add('active');
+                } else {
+                    entry.target.classList.remove('in-focus');
+                    if (navItem) navItem.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        // This will be called after content is loaded
+        function initObservers() {
+            document.querySelectorAll('.year-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
 
     <script type="module">
         import { db, collection, getDocs, query, where } from './firebase-config.js';
@@ -126,13 +302,26 @@
                     <div id="resource-container">
                 `;
 
+                const yearDesc = {
+                    '1': 'The foundation of your engineering career. Focus on Core Physics and Mathematics.',
+                    '2': 'The core departmental shift. Deep dive into your branch-specific fundamentals.',
+                    '3': 'Professional expertise and specialization. The bridge to advanced concepts.',
+                    '4': 'Final year mastery. Focusing on specialized electives and legacy projects.'
+                };
+
                 const years = ['1', '2', '3', '4'];
                 years.forEach(year => {
                     const yearResources = resources.filter(res => res.year === year);
                     if (yearResources.length > 0) {
                         html += `
-                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
-                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-primary); padding-left: 15px;">Year ${year}</h2>
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 70px;">
+                                <div class="year-header">
+                                    <div class="year-title-row">
+                                        <span class="year-badge year-${year}-badge">Year ${year}</span>
+                                        <h2>Academic Collection</h2>
+                                    </div>
+                                    <p class="year-description">${yearDesc[year]}</p>
+                                </div>
                                 <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                         `;
                         yearResources.forEach(data => {
@@ -151,6 +340,7 @@
                 html += '</div>';
                 contentBox.innerHTML = html;
                 lucide.createIcons();
+                initObservers(); // Call initObservers after content is loaded into the DOM
 
             } catch (error) {
                 console.error(error);
@@ -181,6 +371,49 @@
 
         fetchQuantum();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('weightageChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Unit 1', 'Unit 2', 'Unit 3', 'Unit 4', 'Unit 5'],
+                        datasets: [{
+                            label: 'Avg Marks',
+                            data: [15, 20, 30, 18, 17],
+                            backgroundColor: [
+                                'rgba(124, 58, 237, 0.4)',
+                                'rgba(124, 58, 237, 0.4)',
+                                'rgba(45, 212, 191, 0.9)', // Highlight Unit 3
+                                'rgba(124, 58, 237, 0.4)',
+                                'rgba(124, 58, 237, 0.4)'
+                            ],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255,255,255,0.05)' },
+                                ticks: { color: '#94a3b8' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#94a3b8' }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="global.js"></script>
 </body>
 
 </html>

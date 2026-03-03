@@ -4,21 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WHATIN Ecosystem | Your All-in-One Study Hub</title>
+    <title>WHATIN Ecosystem | AKTU Study Materials & Educational Hub</title>
     <meta name="description"
-        content="Access AKTU Quantum Series, Gateway Notes, Handwritten Notes, and Engineering Resources for all semesters.">
+        content="The definitive AKTU partner. Access Quantum Series, Master Handwritten Notes, Gateway PYQs, and Strategic Study Roadmaps. Empowering AKTU students with curated excellence.">
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="author" content="Dushyant Saini">
+    <meta name="keywords"
+        content="WHATIN, AKTU, Dushyant Saini, WHATIN Ecosystem, B.Tech Study Material, Engineering Notes, PYQs">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WHATIN Ecosystem",
+      "url": "https://whatin.in",
+      "description": "The definitive AKTU partner. Access Quantum Series, Master Handwritten Notes, Gateway PYQs, and Strategic Study Roadmaps. Built for AKTU students by Dushyant Saini.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "WHATIN Ecosystem",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://whatin.in/logo.png"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Dushyant Saini",
+          "jobTitle": "Founder & Creator",
+          "description": "Dushyant Saini is an innovative developer and the visionary founder of the WHATIN Ecosystem. He built this platform to revolutionize access to engineering study materials for AKTU students."
+        }
+      }
+    }
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <div class="canvas-texture"></div>
+    <div class="bg-glow glow-top-right" style="background: var(--accent-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--accent-tertiary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-secondary);"></div>
 
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="nav-item">Home</a></li>
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
+                <li><a href="index.html" class="nav-item active">Home</a></li>
                 <li><a href="login.html" class="nav-item admin-link"><i data-lucide="lock"
                             style="width: 14px; margin-right: 5px;"></i>Admin</a></li>
                 <li><a href="#content-hub" class="nav-item">Content</a></li>
@@ -38,10 +77,30 @@
         </div>
 
         <section class="hero" style="padding: 40px 0 60px;">
-            <h1 class="gradient-text">AKTU Study Material</h1>
-            <p>Your one-stop destination for Quantum books, Gateway notes, and Handwritten masterpieces curated for AKTU
-                success.</p>
+            <h1 class="gradient-text">Elevate Your AKTU Journey</h1>
+            <p>More than just a resource bank. WHATIN is your strategic partner in mastering engineering architecture,
+                cracking complex numerics, and securing your future with topper-vetted insights.</p>
         </section>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card glass">
+                <span class="stat-number gradient-text">1.5k+</span>
+                <span class="stat-label">Active Learners</span>
+            </div>
+            <div class="stat-card glass">
+                <span class="stat-number gradient-text">200+</span>
+                <span class="stat-label">Verified PDFs</span>
+            </div>
+            <div class="stat-card glass">
+                <span class="stat-number gradient-text">10+</span>
+                <span class="stat-label">Topper Authors</span>
+            </div>
+            <div class="stat-card glass">
+                <span class="stat-number gradient-text">4.9/5</span>
+                <span class="stat-label">Student Rating</span>
+            </div>
+        </div>
 
         <!-- Search Bar -->
         <div class="search-container">
@@ -139,13 +198,15 @@
                     <div class="list-item">
                         <h4>Year 3: The Career Pressure Cooker</h4>
                         <p>Competitive prep for GATE, GRE, or Placements starts here. Use our topper-verified
-                            <strong>Handwritten Master Notes</strong> to finish semester prep in half the time.</p>
+                            <strong>Handwritten Master Notes</strong> to finish semester prep in half the time.
+                        </p>
                     </div>
                     <div class="list-item">
                         <h4>Year 4: The Final Launchpad</h4>
                         <p>Focus on your Major Project and specialized electives. Maintain your CGPA using our
                             <strong>Important Question Banks</strong> while you focus on your dream company's coding
-                            rounds.</p>
+                            rounds.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -185,15 +246,55 @@
 
     <footer>
         <div class="container">
-            <div class="logo" style="margin-bottom: 20px;">WHAT<span class="gradient-text">IN</span></div>
-            <div class="footer-links" style="margin-bottom: 20px;">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+                    <p style="font-size: 1.05rem; max-width: 300px;">
+                        The ultimate academic companion for AKTU students. Elevating the way you learn with handwritten
+                        notes, PYQs, and Quantum series across all branches.
+                    </p>
+                    <div class="social-links" style="margin-top: 30px; display: flex; gap: 15px;">
+                        <a href="#" class="social-icon"><i data-lucide="github"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="login.html">Admin Portal</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Resources</h4>
+                    <div class="footer-links">
+                        <a href="notes.html">Handwritten Notes</a>
+                        <a href="quantum.html">Quantum Series</a>
+                        <a href="gateway.html">Gateway PYQs</a>
+                        <a href="#syllabus">Syllabus Outlines</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms & Conditions</a>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">&copy; 2026 WHATIN Ecosystem. Made with ❤️ for Students.</p>
+
+            <div
+                style="text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.95rem;">
+                <p class="copyright">&copy; 2026 WHATIN Ecosystem. Crafted with 💡 & ❤️ by <strong>Dushyant
+                        Saini</strong>.</p>
+            </div>
         </div>
     </footer>
 
@@ -201,6 +302,7 @@
     <script>
         lucide.createIcons();
     </script>
+    <script src="global.js"></script>
 </body>
 
 </html>

@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | WHATIN Ecosystem</title>
-    <meta name="description" content="Get in touch with WHATIN Ecosystem for support, feedback, or resource requests.">
+    <title>Contact Us | Connect with WHATIN Ecosystem</title>
+    <meta name="description"
+        content="Reach out to the WHATIN team for resource requests, partnership inquiries, or technical support. We're here to help you navigate your AKTU journey.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
+        crossorigin="anonymous"></script>
     <style>
         .contact-grid {
             display: grid;
@@ -29,10 +34,21 @@
 </head>
 
 <body>
+    <div class="bg-glow glow-top-right" style="background: var(--accent-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--accent-tertiary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-secondary);"></div>
+
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
                 <li><a href="index.html" class="nav-item">Home</a></li>
                 <li><a href="about.html" class="nav-item">About</a></li>
                 <li><a href="contact.html" class="nav-item active">Contact</a></li>
@@ -42,9 +58,9 @@
 
     <main class="container">
         <section class="hero" style="padding: 120px 0 60px;">
-            <h1 class="gradient-text">Get In Touch</h1>
-            <p>Have questions or suggestions? We'd love to hear from you. Reach out to us through any of the channels
-                below.</p>
+            <h1 class="gradient-text">Connect with the Ecosystem</h1>
+            <p>Have a resource request? Encountered a technical glitch? Or just want to share your success story?
+                Our team is always on standby to support the AKTU community.</p>
         </section>
 
         <div class="contact-grid">
@@ -104,6 +120,7 @@
         </div>
     </footer>
     <script>lucide.createIcons();</script>
+    <script src="global.js"></script>
 </body>
 
 </html>

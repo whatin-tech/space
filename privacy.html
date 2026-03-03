@@ -7,6 +7,10 @@
     <title>Privacy Policy | WHATIN Ecosystem</title>
     <meta name="description" content="Privacy Policy for WHATIN Ecosystem - Understanding how we handle your data.">
     <link rel="stylesheet" href="style.css">
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
+        crossorigin="anonymous"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .policy-content h2 {
@@ -30,7 +34,14 @@
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
                 <li><a href="index.html" class="nav-item">Home</a></li>
                 <li><a href="about.html" class="nav-item">About</a></li>
                 <li><a href="contact.html" class="nav-item">Contact</a></li>
@@ -85,6 +96,7 @@
         </div>
     </main>
     <script>lucide.createIcons();</script>
+    <script src="global.js"></script>
 </body>
 
 </html>

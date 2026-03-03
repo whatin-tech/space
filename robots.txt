@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /login.html
+Disallow: /api/
+Disallow: /dashboard/
+
+Allow: /
+Allow: /index.html
+Allow: /about.html
+Allow: /quantum.html
+Allow: /notes.html
+Allow: /gateway.html
+Allow: /contact.html
+Allow: /privacy.html
+Allow: /terms.html
+
+Sitemap: https://whatin.in/sitemap.xml

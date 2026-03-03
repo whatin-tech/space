@@ -7,41 +7,187 @@
     <title>Admin Login | WHATIN Ecosystem</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Animated Login specific styles */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+            margin-top: 100px;
+        }
+
+        .square {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .square i {
+            position: absolute;
+            inset: 0;
+            border: 2px solid #fff;
+            transition: 0.5s;
+        }
+
+        .square i:nth-child(1) {
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            animation: animate-spin 6s linear infinite;
+        }
+
+        .square i:nth-child(2) {
+            border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+            animation: animate-spin 4s linear infinite;
+        }
+
+        .square i:nth-child(3) {
+            border-radius: 41% 44% 56% 59% / 38% 62% 63% 37%;
+            animation: animate-spin-reverse 10s linear infinite;
+        }
+
+        .square:hover i {
+            border: 6px solid var(--clr);
+            filter: drop-shadow(0 0 20px var(--clr));
+        }
+
+        @keyframes animate-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes animate-spin-reverse {
+            0% {
+                transform: rotate(360deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .animated-form {
+            position: absolute;
+            width: 300px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .animated-form h2 {
+            font-size: 2.2em;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .animated-form .inputBx {
+            position: relative;
+            width: 100%;
+        }
+
+        .animated-form .inputBx input {
+            position: relative;
+            width: 100%;
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #fff;
+            font-size: 1.1em;
+            border-radius: 40px;
+            box-shadow: none;
+            outline: none;
+            color: #fff;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .animated-form .inputBx input:focus {
+            border-color: #00f2fe;
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        .animated-form .inputBx input[type="submit"] {
+            width: 100%;
+            background: linear-gradient(45deg, #ff357a, #fff172);
+            border: none;
+            cursor: pointer;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+
+        .animated-form .inputBx input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 53, 122, 0.4);
+        }
+
+        .animated-form .inputBx input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .animated-form .error-text {
+            color: #ff357a;
+            font-size: 0.9rem;
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ff357a;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
                 <li><a href="index.html" class="nav-item">Home</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <section id="login-section" class="glass animate-fade"
-            style="max-width: 400px; margin: 120px auto; padding: 40px; text-align: center;">
-            <i data-lucide="lock" size="48" class="gradient-text" style="margin-bottom: 20px;"></i>
-            <h2 class="gradient-text" style="margin-bottom: 30px;">Admin Access</h2>
+    <main class="container login-wrapper">
+        <div class="square">
+            <i style="--clr:#00ff0a;"></i>
+            <i style="--clr:#ff0057;"></i>
+            <i style="--clr:#fffd44;"></i>
 
-            <div style="text-align: left; margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Email Address</label>
-                <input type="email" id="login-email" class="glass"
-                    style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white;"
-                    placeholder="admin@whatin.in">
+            <div class="animated-form">
+                <h2>Admin Login</h2>
+                <div class="inputBx">
+                    <input type="email" id="login-email" placeholder="Email Address">
+                </div>
+                <div class="inputBx">
+                    <input type="password" id="login-password" placeholder="Password">
+                </div>
+                <div class="inputBx">
+                    <input type="submit" id="login-btn" value="Sign in">
+                </div>
+                <p id="error-msg" class="error-text"></p>
             </div>
-
-            <div style="text-align: left; margin-bottom: 30px;">
-                <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Password</label>
-                <input type="password" id="login-password" class="glass"
-                    style="width: 100%; padding: 12px; border: 1px solid var(--glass-border); border-radius: 10px; color: white;"
-                    placeholder="••••••••">
-            </div>
-
-            <button id="login-btn" class="btn btn-primary" style="width: 100%;">Authorize & Enter</button>
-            <p id="error-msg" style="color: #ff576c; margin-top: 20px; font-size: 0.9rem; display: none;"></p>
-        </section>
+        </div>
     </main>
 
     <script type="module">
@@ -64,7 +210,7 @@
 
             try {
                 loginBtn.disabled = true;
-                loginBtn.innerText = "Authenticating...";
+                loginBtn.value = "Authenticating...";
                 await signInWithEmailAndPassword(auth, email, pass);
                 window.location.href = "admin.html";
             } catch (error) {
@@ -72,7 +218,7 @@
                 errorMsg.innerText = "Error: " + error.message;
                 errorMsg.style.display = "block";
                 loginBtn.disabled = false;
-                loginBtn.innerText = "Authorize & Enter";
+                loginBtn.value = "Sign in";
             }
         });
 
@@ -83,6 +229,7 @@
             }
         });
     </script>
+    <script src="global.js"></script>
 </body>
 
 </html>

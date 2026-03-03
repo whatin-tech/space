@@ -4,12 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Notes | WHATIN Ecosystem</title>
+    <title>Master Handwritten Notes | Topper-Verified AKTU Resources</title>
+    <meta name="description"
+        content="Access premium, topper-verified handwritten notes for all AKTU subjects. Focused on conceptual clarity and exam-scoring precision. Experience the cognitive benefits of handwritten learning.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="theme-notes">
+    <div class="canvas-texture"></div>
+    <img src="expressionist_notes_landscape_sepia_1772525679299.png" class="art-bg" alt="Atmospheric Art">
+
+    <div class="bg-glow glow-top-right" style="background: var(--notes-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--notes-secondary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-tertiary);"></div>
+
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
@@ -24,7 +33,24 @@
     <main class="container">
         <section class="hero" style="padding: 120px 0 60px;">
             <h1 class="gradient-text">Master Handwritten Notes</h1>
-            <p>Premium, topper-verified notes captured for the highest level of conceptual clarity.</p>
+            <p>Step into the mind of a topper. Our handwritten collection is more than just ink on paper;
+                it's a journey through conceptual simplification and artistic academic clarity.</p>
+        </section>
+
+        <!-- THE ART OF NOTE-TAKING SECTION -->
+        <section class="rich-content" style="margin-bottom: 80px; border-color: var(--notes-primary);">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The Art of
+                Strategic Note-Taking</h2>
+            <div class="content-block">
+                <p>In an era of digital overload, the <strong>Handwritten Note</strong> remains the gold standard for
+                    deep learning. Research shows that the tactile action of writing by hand activates more regions of
+                    the brain than typing, leading to better retention of complex engineering principles.</p>
+                <p style="margin-top: 20px;">At WHATIN, we don't just provide any notes. We curate
+                    <strong>Topper-Verified Masters</strong>. These are notes that have been battle-tested in AKTU
+                    examinations, resulting in SGPAs above 9.0. They are designed for the "80/20" speed-run: where you
+                    learn the most critical 20% of information that accounts for 80% of your exam marks.
+                </p>
+            </div>
         </section>
 
         <div id="content-box">
@@ -100,6 +126,36 @@
         </div>
     </footer>
 
+    <div class="side-nav">
+        <a href="#year-section-1" class="side-nav-item" title="Year 1">1</a>
+        <a href="#year-section-2" class="side-nav-item" title="Year 2">2</a>
+        <a href="#year-section-3" class="side-nav-item" title="Year 3">3</a>
+        <a href="#year-section-4" class="side-nav-item" title="Year 4">4</a>
+    </div>
+
+    <script>
+        const observerOptions = { root: null, threshold: 0.3 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navItem = document.querySelector(`.side-nav-item[href="#${id}"]`);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-focus');
+                    if (navItem) navItem.classList.add('active');
+                } else {
+                    entry.target.classList.remove('in-focus');
+                    if (navItem) navItem.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        function initObservers() {
+            document.querySelectorAll('.year-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+
     <script type="module">
         import { db, collection, getDocs, query, where } from './firebase-config.js';
         lucide.createIcons();
@@ -126,13 +182,26 @@
                     <div id="resource-container">
                 `;
 
+                const yearDesc = {
+                    '1': 'Master the basics. These notes simplify the complex weeding-out subjects of your first year.',
+                    '2': 'The technical heartbeat. Topper-verified notes for Data Structures, ALGO, and Core Subjects.',
+                    '3': 'Professional depth. Specialized subject notes designed for high-impact exam scoring.',
+                    '4': 'Final lap excellence. Curated notes for specialized electives and advanced projects.'
+                };
+
                 const years = ['1', '2', '3', '4'];
                 years.forEach(year => {
                     const yearResources = resources.filter(res => res.year === year);
                     if (yearResources.length > 0) {
                         html += `
-                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
-                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-tertiary); padding-left: 15px;">Year ${year} Master Notes</h2>
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 70px;">
+                                <div class="year-header">
+                                    <div class="year-title-row">
+                                        <span class="year-badge year-${year}-badge">Year ${year}</span>
+                                        <h2>Master Handwritten Notes</h2>
+                                    </div>
+                                    <p class="year-description">${yearDesc[year]}</p>
+                                </div>
                                 <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                         `;
                         yearResources.forEach(data => {
@@ -151,7 +220,7 @@
                 html += '</div>';
                 contentBox.innerHTML = html;
                 lucide.createIcons();
-
+                initObservers();
             } catch (error) {
                 console.error(error);
                 contentBox.innerHTML = '<p style="color: #ff576c; text-align: center;">Error loading Notes.</p>';

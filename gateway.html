@@ -4,12 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gateway Materials | WHATIN Ecosystem</title>
+    <title>Gateway Materials | AKTU Official Syllabus & PYQ Blueprint</title>
+    <meta name="description"
+        content="Unlock the official AKTU Gateway. Download current syllabi, previous year papers (PYQs), and expert-curated question banks. Your roadmap to strategic exam preparation.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="theme-gateway">
+    <div class="canvas-texture"></div>
+    <img src="expressionist_teal_blueprint_storm_1772525695285.png" class="art-bg" alt="Atmospheric Art">
+
+    <div class="bg-glow glow-top-right" style="background: var(--gateway-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--gateway-secondary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-primary);"></div>
+
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
@@ -23,8 +32,25 @@
 
     <main class="container">
         <section class="hero" style="padding: 120px 0 60px;">
-            <h1 class="gradient-text">Gateway to Success</h1>
-            <p>Syllabus, Previous Year Papers, and Essential Question Banks for AKTU.</p>
+            <h1 class="gradient-text">The AKTU Examination Gateway</h1>
+            <p>Access the structural blueprints of your degree. From official syllabi to five-year trend analyses,
+                the Gateway is your command center for tactical exam preparation.</p>
+        </section>
+
+        <!-- AKTU EXAMINATION BLUEPRINT SECTION -->
+        <section class="rich-content" style="margin-bottom: 80px; border-color: var(--gateway-primary);">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The
+                Examination Blueprint</h2>
+            <div class="content-block">
+                <p>Success in AKTU is 40% knowledge and 60% strategy. The <strong>Examination Gateway</strong> is
+                    designed to provide you with the latter. By analyzing the structural patterns of the last
+                    half-decade, we've identified the recurring "Exam Core" — the set of topics and question formats
+                    that form the baseline of every semester paper.</p>
+                <p style="margin-top: 20px;">Use our <strong>PYQ Mapping</strong> to identify thematic shifts. We don't
+                    just dump papers; we provide the official syllabus context so you can see exactly which units are
+                    gaining weightage. This is more than a download page; it's a diagnostic tool to help you allocate
+                    your revision time where it matters most.</p>
+            </div>
         </section>
 
         <div id="content-box">
@@ -91,6 +117,36 @@
         </div>
     </footer>
 
+    <div class="side-nav">
+        <a href="#year-section-1" class="side-nav-item" title="Year 1">1</a>
+        <a href="#year-section-2" class="side-nav-item" title="Year 2">2</a>
+        <a href="#year-section-3" class="side-nav-item" title="Year 3">3</a>
+        <a href="#year-section-4" class="side-nav-item" title="Year 4">4</a>
+    </div>
+
+    <script>
+        const observerOptions = { root: null, threshold: 0.3 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navItem = document.querySelector(`.side-nav-item[href="#${id}"]`);
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-focus');
+                    if (navItem) navItem.classList.add('active');
+                } else {
+                    entry.target.classList.remove('in-focus');
+                    if (navItem) navItem.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        function initObservers() {
+            document.querySelectorAll('.year-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+
     <script type="module">
         import { db, collection, getDocs, query, where } from './firebase-config.js';
         lucide.createIcons();
@@ -117,13 +173,26 @@
                     <div id="resource-container">
                 `;
 
+                const yearDesc = {
+                    '1': 'Official Gateway to first-year success. Syllabi and PYQs for the fundamental blocks.',
+                    '2': 'Structural accuracy starts here. Five-year paper mapping for your core departmental units.',
+                    '3': 'The specialization blueprint. Analyzing patterns for advanced professional subjects.',
+                    '4': 'Final year command center. Official syllabus for your specialized electives and majors.'
+                };
+
                 const years = ['1', '2', '3', '4'];
                 years.forEach(year => {
                     const yearResources = resources.filter(res => res.year === year);
                     if (yearResources.length > 0) {
                         html += `
-                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
-                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-secondary); padding-left: 15px;">Year ${year} Documents</h2>
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 70px;">
+                                <div class="year-header">
+                                    <div class="year-title-row">
+                                        <span class="year-badge year-${year}-badge">Year ${year}</span>
+                                        <h2>Examination Gateway</h2>
+                                    </div>
+                                    <p class="year-description">${yearDesc[year]}</p>
+                                </div>
                                 <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                         `;
                         yearResources.forEach(data => {
@@ -142,7 +211,7 @@
                 html += '</div>';
                 contentBox.innerHTML = html;
                 lucide.createIcons();
-
+                initObservers();
             } catch (error) {
                 console.error(error);
                 contentBox.innerHTML = '<p style="color: #ff576c; text-align: center;">Error loading resources.</p>';

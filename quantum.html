@@ -4,12 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Library | WHATIN Ecosystem</title>
+    <title>Quantum Digital Library | Comprehensive AKTU Series</title>
+    <meta name="description"
+        content="Explore the full AKTU Quantum Series library. Verified digital copies for all engineering branches, semesters, and years. The ultimate revision tool for AKTU exams.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-<body>
+<body class="theme-quantum">
+    <div class="canvas-texture"></div>
+    <img src="expressionist_starry_library_1772525660121.png" class="art-bg" alt="Atmospheric Art">
+
+    <div class="bg-glow glow-top-right" style="background: var(--quantum-primary);"></div>
+    <div class="bg-glow glow-bottom-left" style="background: var(--quantum-secondary);"></div>
+    <div class="bg-glow glow-center" style="background: var(--accent-primary);"></div>
+
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
@@ -23,8 +32,27 @@
 
     <main class="container">
         <section class="hero" style="padding: 120px 0 60px;">
-            <h1 class="gradient-text">Quantum Series Library</h1>
-            <p>Access the complete digital collection of Quantum Series for all AKTU branches.</p>
+            <h1 class="gradient-text">The Quantum Digital Library</h1>
+            <p>Your portal to the most comprehensive collection of AKTU Quantum Series. Curated for clarity,
+                digitized for speed, and structured for your academic success.</p>
+        </section>
+
+        <!-- THE QUANTUM LEGACY SECTION -->
+        <section class="rich-content" style="margin-bottom: 80px; border-color: var(--quantum-primary);">
+            <h2 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">The Quantum
+                Legacy</h2>
+            <div class="content-block">
+                <p>For over a decade, the <strong>Quantum Series</strong> has been the backbone of AKTU exam
+                    preparation. What started as a simple question bank has evolved into a sophisticated revision
+                    ecosystem. At WHATIN, we recognize this legacy. Our digital library isn't just a list of links; it's
+                    a preserved archive of engineering knowledge tailored specifically for the AKTU examination pattern.
+                </p>
+                <p style="margin-top: 20px;">We believe in <strong>Accessible Excellence</strong>. Every PDF in our
+                    library is selected for its legibility and completeness. Whether you are a first-year student just
+                    starting with Engineering Mathematics or a final-year student diving into Cloud Computing, the
+                    Quantum series provided here offers the fastest path to conceptual understanding and exam-readiness.
+                </p>
+            </div>
         </section>
 
         <!-- Dynamic Content Section -->
@@ -49,7 +77,8 @@
                     <div class="feature-item">
                         <h4><i data-lucide="star" style="color: gold; margin-right: 10px;"></i> Star Marking</h4>
                         <p>Most Quantums mark frequently repeated questions with stars (*). These are your
-                            <strong>Must-Read</strong> zones for the night before the exam.</p>
+                            <strong>Must-Read</strong> zones for the night before the exam.
+                        </p>
                     </div>
                     <div class="feature-item">
                         <h4><i data-lucide="check-square" style="color: var(--accent-primary); margin-right: 10px;"></i>
@@ -100,6 +129,43 @@
         </div>
     </footer>
 
+    <div class="side-nav">
+        <a href="#year-section-1" class="side-nav-item" title="Year 1">1</a>
+        <a href="#year-section-2" class="side-nav-item" title="Year 2">2</a>
+        <a href="#year-section-3" class="side-nav-item" title="Year 3">3</a>
+        <a href="#year-section-4" class="side-nav-item" title="Year 4">4</a>
+    </div>
+
+    <script>
+        // Intersection Observer for Section Highlighting
+        const observerOptions = {
+            root: null,
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute('id');
+                const navItem = document.querySelector(`.side-nav-item[href="#${id}"]`);
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-focus');
+                    if (navItem) navItem.classList.add('active');
+                } else {
+                    entry.target.classList.remove('in-focus');
+                    if (navItem) navItem.classList.remove('active');
+                }
+            });
+        }, observerOptions);
+
+        // This will be called after content is loaded
+        function initObservers() {
+            document.querySelectorAll('.year-section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+    </script>
+
     <script type="module">
         import { db, collection, getDocs, query, where } from './firebase-config.js';
         lucide.createIcons();
@@ -126,13 +192,26 @@
                     <div id="resource-container">
                 `;
 
+                const yearDesc = {
+                    '1': 'The foundation of your engineering career. Focus on Core Physics and Mathematics.',
+                    '2': 'The core departmental shift. Deep dive into your branch-specific fundamentals.',
+                    '3': 'Professional expertise and specialization. The bridge to advanced concepts.',
+                    '4': 'Final year mastery. Focusing on specialized electives and legacy projects.'
+                };
+
                 const years = ['1', '2', '3', '4'];
                 years.forEach(year => {
                     const yearResources = resources.filter(res => res.year === year);
                     if (yearResources.length > 0) {
                         html += `
-                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 50px;">
-                                <h2 style="margin-bottom: 25px; border-left: 4px solid var(--accent-primary); padding-left: 15px;">Year ${year}</h2>
+                            <div class="year-section" id="year-section-${year}" style="margin-bottom: 70px;">
+                                <div class="year-header">
+                                    <div class="year-title-row">
+                                        <span class="year-badge year-${year}-badge">Year ${year}</span>
+                                        <h2>Academic Collection</h2>
+                                    </div>
+                                    <p class="year-description">${yearDesc[year]}</p>
+                                </div>
                                 <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                         `;
                         yearResources.forEach(data => {
@@ -151,6 +230,7 @@
                 html += '</div>';
                 contentBox.innerHTML = html;
                 lucide.createIcons();
+                initObservers(); // Call initObservers after content is loaded into the DOM
 
             } catch (error) {
                 console.error(error);

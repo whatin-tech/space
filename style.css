@@ -1057,6 +1057,8 @@ footer {
         border-radius: 20px;
         color: white !important;
         justify-content: center;
+        min-height: 50px;
+        /* Enhanced touch target */
     }
 
     .grid,
@@ -1075,18 +1077,40 @@ footer {
         margin: 40px 0;
         width: 100%;
         border-radius: 20px;
-        transform: none;
+        transform: none !important;
+        /* Disable 3D transforms on mobile */
+        line-height: 1.7;
+        /* Better readability */
     }
 
     .footer-content {
         padding: 40px 20px;
         border-radius: 20px;
         gap: 30px;
-        transform: none;
+        transform: none !important;
+    }
+
+    /* Suppress hover effects that feel buggy on touch */
+    .card:hover,
+    .stat-card:hover,
+    .btn:hover {
+        transform: scale(1.02) !important;
+        /* Minimal scale only, no 3D rotation */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
     }
 
     .card,
     .stat-card {
         padding: 25px;
+        transform: none !important;
+    }
+
+    .btn,
+    .filter-btn {
+        min-height: 44px;
+        /* Apple/Google standard touch target */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 }

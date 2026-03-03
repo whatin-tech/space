@@ -7,6 +7,9 @@
     <title>Gateway Materials | AKTU Official Syllabus & PYQ Blueprint</title>
     <meta name="description"
         content="Unlock the official AKTU Gateway. Download current syllabi, previous year papers (PYQs), and expert-curated question banks. Your roadmap to strategic exam preparation.">
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="expressionist_teal_blueprint_storm_1772525695285.png" as="image">
     <link rel="stylesheet" href="style.css">
     <!-- Font Preloading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,10 +36,8 @@
       }
     }
     </script>
-    <!-- Google AdSense -->
+    <!-- Google AdSense (Lazy Loaded at Bottom) -->
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
-        crossorigin="anonymous"></script>
 </head>
 
 <body class="theme-gateway">
@@ -50,7 +51,7 @@
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <button class="menu-toggle" id="mobile-menu-btn">
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <div class="hamburger">
                     <span></span>
                     <span></span>
@@ -388,6 +389,25 @@
         });
     </script>
     <script src="global.js" defer></script>
+    <!-- Lazy Load AdSense for Core Web Vitals (TBT/INP) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let adsLoaded = false;
+            const loadAds = () => {
+                if (adsLoaded) return;
+                adsLoaded = true;
+                const script = document.createElement("script");
+                script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727";
+                script.async = true;
+                script.crossOrigin = "anonymous";
+                document.head.appendChild(script);
+            };
+            window.addEventListener('scroll', loadAds, { once: true, passive: true });
+            window.addEventListener('touchstart', loadAds, { once: true, passive: true });
+            window.addEventListener('click', loadAds, { once: true, passive: true });
+            setTimeout(loadAds, 3500);
+        });
+    </script>
 </body>
 
 </html>

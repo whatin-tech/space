@@ -1,3 +1,11 @@
+/* --- Core Web Vitals Safeguards --- */
+[data-lucide] {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
 :root {
     --bg-color: #06080c;
     /* Deeper background for more contrast */

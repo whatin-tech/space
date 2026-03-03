@@ -7,6 +7,8 @@
     <title>WHATIN Ecosystem | AKTU Study Materials & Educational Hub</title>
     <meta name="description"
         content="The definitive AKTU partner. Access Quantum Series, Master Handwritten Notes, Gateway PYQs, and Strategic Study Roadmaps. Empowering AKTU students with curated excellence.">
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
     <!-- Font Preloading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,10 +42,8 @@
       }
     }
     </script>
-    <!-- Google AdSense -->
+    <!-- Google AdSense (Lazy Loaded at Bottom) -->
     <meta name="google-adsense-account" content="ca-pub-3296618712266727">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <button class="menu-toggle" id="mobile-menu-btn">
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu">
                 <div class="hamburger">
                     <span></span>
                     <span></span>
@@ -306,6 +306,25 @@
 
     <script src="script.js"></script>
     <script src="global.js" defer></script>
+    <!-- Lazy Load AdSense for Core Web Vitals (TBT/INP) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let adsLoaded = false;
+            const loadAds = () => {
+                if (adsLoaded) return;
+                adsLoaded = true;
+                const script = document.createElement("script");
+                script.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727";
+                script.async = true;
+                script.crossOrigin = "anonymous";
+                document.head.appendChild(script);
+            };
+            window.addEventListener('scroll', loadAds, { once: true, passive: true });
+            window.addEventListener('touchstart', loadAds, { once: true, passive: true });
+            window.addEventListener('click', loadAds, { once: true, passive: true });
+            setTimeout(loadAds, 3500); // Fallback if no interaction
+        });
+    </script>
 </body>
 
 </html>

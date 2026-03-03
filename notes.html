@@ -9,6 +9,28 @@
         content="Access premium, topper-verified handwritten notes for all AKTU subjects. Focused on conceptual clarity and exam-scoring precision. Experience the cognitive benefits of handwritten learning.">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="author" content="Dushyant Saini">
+    <meta name="keywords"
+        content="WHATIN, AKTU Notes, Handwritten Notes, Engineering Top Notes, Dushyant Saini, Study Material">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Master Handwritten Notes",
+      "url": "https://whatin.in/notes.html",
+      "description": "Premium, topper-verified handwritten notes for all AKTU subjects, curated by Dushyant Saini.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "WHATIN Ecosystem",
+        "founder": {
+          "@type": "Person",
+          "name": "Dushyant Saini"
+        }
+      }
+    }
+    <!-- Google AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-3296618712266727">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3296618712266727" crossorigin="anonymous"></script>
 </head>
 
 <body class="theme-notes">
@@ -22,7 +44,14 @@
     <header>
         <nav class="glass">
             <div class="logo">WHAT<span class="gradient-text">IN</span></div>
-            <ul class="nav-links">
+            <button class="menu-toggle" id="mobile-menu-btn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="nav-drawer">
                 <li><a href="index.html" class="nav-item">Home</a></li>
                 <li><a href="about.html" class="nav-item">About</a></li>
                 <li><a href="contact.html" class="nav-item">Contact</a></li>
@@ -111,18 +140,105 @@
                 </div>
             </div>
         </section>
+        <!-- DATA & STATISTICS SECTION -->
+        <section class="data-viz-section">
+            <div class="chart-card">
+                <h4><i data-lucide="bar-chart-2"></i> Notes Retention Impact</h4>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Average AKTU student pass
+                    rates correlated with their primary study resource.</p>
+                <div style="position: relative; height: 250px; width: 100%;">
+                    <canvas id="retentionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h4><i data-lucide="trending-up"></i> Most Demanded Notes (AKTU)</h4>
+                <ul class="data-list">
+                    <li class="data-item">
+                        <span class="rank">#1</span>
+                        <span class="subject">Data Structures (KCS301)</span>
+                        <span class="stat"><i data-lucide="download" size="14"
+                                style="display:inline; margin-right:4px;"></i> 9.8k</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#2</span>
+                        <span class="subject">Operating Systems (KCS401)</span>
+                        <span class="stat"><i data-lucide="download" size="14"
+                                style="display:inline; margin-right:4px;"></i> 8.5k</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#3</span>
+                        <span class="subject">Artificial Intelligence (KCS701)</span>
+                        <span class="stat"><i data-lucide="download" size="14"
+                                style="display:inline; margin-right:4px;"></i> 7.2k</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#4</span>
+                        <span class="subject">Computer Networks (KCS603)</span>
+                        <span class="stat"><i data-lucide="download" size="14"
+                                style="display:inline; margin-right:4px;"></i> 6.9k</span>
+                    </li>
+                    <li class="data-item">
+                        <span class="rank">#5</span>
+                        <span class="subject">Eng. Mathematics-I (KAS103T)</span>
+                        <span class="stat"><i data-lucide="download" size="14"
+                                style="display:inline; margin-right:4px;"></i> 5.1k</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-links" style="margin-bottom: 20px;">
-                <a href="index.html">Home</a>
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms & Conditions</a>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">WHAT<span class="gradient-text">IN</span></div>
+                    <p style="font-size: 1.05rem; max-width: 300px;">
+                        The ultimate academic companion for AKTU students. Elevating the way you learn with handwritten
+                        notes, PYQs, and Quantum series across all branches.
+                    </p>
+                    <div class="social-links" style="margin-top: 30px; display: flex; gap: 15px;">
+                        <a href="#" class="social-icon"><i data-lucide="github"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="social-icon"><i data-lucide="linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="about.html">About Us</a>
+                        <a href="contact.html">Contact Us</a>
+                        <a href="login.html">Admin Portal</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Resources</h4>
+                    <div class="footer-links">
+                        <a href="notes.html">Handwritten Notes</a>
+                        <a href="quantum.html">Quantum Series</a>
+                        <a href="gateway.html">Gateway PYQs</a>
+                        <a href="#syllabus">Syllabus Outlines</a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4 style="margin-bottom: 25px; font-size: 1.3rem; color: #fff;">Legal</h4>
+                    <div class="footer-links">
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms & Conditions</a>
+                    </div>
+                </div>
             </div>
-            <p class="copyright">&copy; 2026 WHATIN Ecosystem. All Rights Reserved.</p>
+
+            <div
+                style="text-align: center; margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.95rem;">
+                <p class="copyright">&copy; 2026 WHATIN Ecosystem. Crafted with 💡 & ❤️ for the Student Community.</p>
+            </div>
         </div>
     </footer>
 
@@ -236,6 +352,42 @@
 
         fetchNotes();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('retentionChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Handwritten Notes', 'Quantums ', 'Textbooks', 'Video Lectures'],
+                        datasets: [{
+                            data: [88, 65, 45, 75],
+                            backgroundColor: [
+                                '#f59e0b', // Notes Primary
+                                '#ec4899', // Year 4 Pink
+                                '#a855f7', // Acc Tertiary
+                                '#00e0ff'  // Acc Primary
+                            ],
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#94a3b8', font: { family: 'Outfit' } }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="global.js"></script>
 </body>
 
 </html>

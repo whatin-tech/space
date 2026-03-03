@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | WHATIN Ecosystem</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Preloading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Deferred Scripts -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
     <style>
         /* Animated Login specific styles */
         .login-wrapper {
@@ -193,8 +198,6 @@
     <script type="module">
         import { auth, signInWithEmailAndPassword, onAuthStateChanged } from './firebase-config.js';
 
-        lucide.createIcons();
-
         const loginBtn = document.getElementById('login-btn');
         const errorMsg = document.getElementById('error-msg');
 
@@ -229,7 +232,7 @@
             }
         });
     </script>
-    <script src="global.js"></script>
+    <script src="global.js" defer></script>
 </body>
 
 </html>
